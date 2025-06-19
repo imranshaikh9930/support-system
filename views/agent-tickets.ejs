@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assigned Tickets</title>
+</head>
+<body>
+  <h2>Assigned Tickets</h2>
+<ul>
+  <% tickets.forEach(ticket => { %>
+    <li>
+      <strong><%= ticket.title %></strong> - <%= ticket.status %>
+      <form action="/agent/ticket/<%= ticket._id %>/status" method="POST" style="display:inline;">
+        <select name="status">
+          <option <%= ticket.status === 'Open' ? 'selected' : '' %>>Open</option>
+          <option <%= ticket.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+          <option <%= ticket.status === 'Resolved' ? 'selected' : '' %>>Resolved</option>
+        </select>
+        <button type="submit">Update</button>
+      </form>
+      <a href="<%= ticket.githubIssueUrl %>" target="_blank">GitHub</a>
+    </li>
+  <% }) %>
+</ul>
+</body>
+</html>
+
+

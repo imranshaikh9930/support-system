@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <div class="container">
+    <h2 class="dashboard-title">Admin Dashboard</h2>
+
+    <section class="dashboard-section">
+      <h3>Ticket Status</h3>
+      <ul class="stats-list">
+        <li><span class="label">Open:</span> <%= stats.open %></li>
+        <li><span class="label">In Progress:</span> <%= stats.inProgress %></li>
+        <li><span class="label">Resolved:</span> <%= stats.resolved %></li>
+      </ul>
+    </section>
+
+    <section class="dashboard-section">
+      <h3>Category Breakdown</h3>
+      <ul class="stats-list">
+        <li><span class="label">Bug:</span> <%= stats.bug %></li>
+        <li><span class="label">Feature Request:</span> <%= stats.feature %></li>
+        <li><span class="label">General:</span> <%= stats.general %></li>
+      </ul>
+    </section>
+
+    <a href="/admin/tickets" class="btn view-table-btn">See Table Of Tickets</a>
+
+    <form action="/auth/logout" method="POST" class="logout-form">
+      <button type="submit" class="btn logout-btn">Logout</button>
+    </form>
+  </div>
+</body>
+</html>

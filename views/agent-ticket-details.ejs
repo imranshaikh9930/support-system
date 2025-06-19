@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css" />
+  <title>Assigned Ticket Details</title>
+</head>
+<body>
+  <div class="ticket-details-container">
+  <h2 class="ticket-details-title">Assigned Ticket Details</h2>
+  
+  <p class="ticket-info"><strong>Title:</strong> <%= ticket.title %></p>
+  <p class="ticket-info"><strong>Description:</strong> <%= ticket.description %></p>
+  <p class="ticket-info"><strong>Status:</strong> <%= ticket.status %></p>
+  <p class="ticket-info"><strong>Category:</strong> <%= ticket.category %></p>
+  <p class="ticket-info">
+    <strong>GitHub:</strong>
+    <a href="<%= ticket.githubIssueUrl %>" target="_blank" class="github-link">View Issue</a>
+  </p>
+
+  <hr class="divider" />
+
+  <div class="replies-section">
+    <h3 class="replies-title">Replies:</h3>
+
+    <% if (replies.length === 0) { %>
+      <p class="no-replies">No replies yet.</p>
+    <% } else { %>
+      <% replies.forEach(reply => { %>
+        <div class="reply-card">
+          <strong class="reply-author">
+            <%= reply.user.name %> (<%= reply.user.roles %>)
+          </strong>
+          <p class="reply-message"><%= reply.message %></p>
+          <hr class="reply-divider"/>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</div>
+
+</body>
+</html>

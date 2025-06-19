@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ticket Details</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+ <h1 class="ticket-details-heading">Ticket Details</h1>
+
+<div class="ticket-details-card">
+  <p><strong>Title:</strong> <%= ticket.title %></p>
+  <p><strong>Description:</strong> <%= ticket.description %></p>
+  <p><strong>Status:</strong> <%= ticket.status %></p>
+  <p><strong>Category:</strong> <%= ticket.category %></p>
+  <p><strong>GitHub Issue:</strong> 
+    <a href="<%= ticket.githubIssueUrl %>" target="_blank">View on GitHub</a>
+  </p>
+  <p><strong>Created At:</strong> <%= new Date(ticket.createdAt).toLocaleString() %></p>
+</div>
+
+<hr class="divider" />
+
+<h3 class="replies-heading">Replies</h3>
+
+<% if (replies.length === 0) { %>
+  <p class="no-replies-msg">No replies yet.</p>
+<% } else { %>
+  <% replies.forEach(reply => { %>
+    <div class="reply-card">
+      <strong><%= reply.user.name %> (<%= reply.user.roles %>)</strong>
+      <p><%= reply.message %></p>
+      <hr />
+    </div>
+  <% }) %>
+<% } %>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Tickets</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2 class="page-title">My Tickets</h2>
+
+    <% if (tickets.length === 0) { %>
+      <p class="no-tickets">No tickets found.</p>
+    <% } else { %>
+      <ul class="ticket-list">
+        <% tickets.forEach(ticket => { %>
+          <li class="ticket-item">
+            <strong class="ticket-title"><%= ticket.title %></strong>
+            <span class="ticket-status">[<%= ticket.status %>]</span>
+
+            <div class="ticket-actions">
+              <a href="/ticket/my-tickets/<%= ticket._id %>" class="btn view-btn">View</a>
+              <a href="<%= ticket.githubIssueUrl %>" target="_blank" class="btn github-btn">GitHub Issue</a>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
+</body>
+</html>

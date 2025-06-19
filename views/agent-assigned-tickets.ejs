@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Assigned Tickets</title>
+  </head>
+
+  <body>
+    <h1>Tickets Assigned to You (agent)</h1>
+    <form class="abtn" action="/auth/logout" method="POST">
+      <button type="submit">Logout</button>
+    </form>
+    <% const unresolvedTickets=tickets.filter(ticket=> ticket.status !== "Resolved"); %>
+
+      <% if (unresolvedTickets.length===0) { %>
+        <p style="text-align: center; color: #888; font-style: italic;">No tickets assigned to you.</p>
+        <% } else { %>
+          <div class="agent-container">
+            <% unresolvedTickets.forEach(ticket=> { %>
+
+              <div class="agent-ticket-card">
+                <h3>
+                  <%= ticket.title %>
+                </h3>
+                <p><strong>Description:</strong>
+                  <%= ticket.description %>
+                </p>
+                <p><strong>Category:</strong>
+                  <%= ticket.category %>
+                </p>
+                <p><strong>Status:</strong>
+                  <%= ticket.status %>
+                </p>
+                <p><strong>GitHub Issue:</strong>
+                  <a href="<%= ticket.githubIssueUrl %>" target="_blank">View on GitHub</a>
+                </p>
+                <p><strong>Created At:</strong>
+                  <%= new Date(ticket.createdAt).toLocaleString() %>
+                </p>
+
+
+                <form action="/ticket/<%= ticket._id %>/status" method="POST">
+                  <label>Update Status:</label>
+                  <select name="status" required>
+                    <option value="">Select</option>
+                    <option value="Open" <%=ticket.status==="Open" ? "selected" : "" %>>Open</option>
+                    <option value="In Progress" <%=ticket.status==="In Progress" ? "selected" : "" %>>In Progress
+                    </option>
+                    <option value="Resolved" <%=ticket.status==="Resolved" ? "selected" : "" %>>Resolved</option>
+                  </select>
+                  <button type="submit">Update</button>
+                </form>
+
+
+                <form action="/reply/<%= ticket._id %>" method="POST" style="margin-top:10px;">
+                  <textarea name="message" rows="2" placeholder="Your reply..." required></textarea><br />
+                  <button type="submit">Post Reply</button>
+                </form>
+              </div>
+              <% }) %>
+                <% } %>
+          </div>
+
+  </body>
+
+</html>

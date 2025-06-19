@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="/css/style.css" />
+    <title>All Tickets</title>
+</head>
+<body>
+    <div class="table-container">
+<h2>All Tickets</h2>
+
+<table class="ticket-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Category</th>
+      <th>Customer</th>
+      <th>Assigned To</th>
+      <th>Assign Agent</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% tickets.forEach(ticket => { %>
+      <tr>
+        <td><%= ticket.title %></td>
+        <td><%= ticket.status %></td>
+        <td><%= ticket.category %></td>
+        <td><%= ticket.customer?.name || 'N/A' %></td>
+        <td><%= ticket.assignedTo?.name || 'Unassigned' %></td>
+        <td>
+          <form action="/admin/assign/<%= ticket._id %>" method="POST">
+            <select name="agentId">
+              <% agents.forEach(agent => { %>
+                <option value="<%= agent._id %>" <%= ticket.assignedTo?._id.toString() === agent._id.toString() ? 'selected' : '' %>>
+                  <%= agent.name %>
+                </option>
+              <% }) %>
+            </select>
+            <button type="submit">Assign</button>
+          </form>
+        </td>
+        <td>
+          <% if (ticket.status !== "Resolved") { %>
+            <form action="/admin/close/<%= ticket._id %>" method="POST">
+              <button type="submit">Close Ticket</button>
+            </form>
+          <% } else { %>
+            <span class="resolved-badge">Resolved</span>
+          <% } %>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<div class="btd">
+  <form  action="/admin/dashboard" method="GET">
+  <button type="submit">Back To Dashboard</button>
+  </form>
+  
+  <form action="/auth/logout" method="POST">
+  <button type="submit">Logout</button>
+  </form>
+</div>
+    </div>
+</body>
+</html>
+
