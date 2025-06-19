@@ -48,7 +48,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log(req.user);
+  // console.log(req.user);
   try {
     const user = await User.findOne({ email });
 
@@ -80,7 +80,7 @@ exports.login = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-  console.log("logout btn click");
+ 
 
   res.clearCookie("token", {
     httpOnly: true,

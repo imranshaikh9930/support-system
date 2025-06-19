@@ -4,7 +4,7 @@ exports.postReply = async (req, res) => {
   try {
     const { message } = req.body;
 
-    console.log("message", message);
+    // console.log("message", message);
 
     const ticketId = req.params.id;
 

@@ -16,10 +16,10 @@ exports.updateTicketStatus = async (req, res) => {
     assignedTo: req.user.id,
   });
 
-  console.log("ticket", ticket);
+  // console.log("ticket", ticket);
   if (!ticket) return res.status(404).send("Ticket not found or unauthorized.");
 
-  console.log("req.body", req.body);
+  // console.log("req.body", req.body);
   ticket.status = req.body.status;
   await ticket.save();
 

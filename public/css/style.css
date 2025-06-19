@@ -197,7 +197,10 @@ h1, h2, .page-title {
   background-color: #007bff;
   color: #fff;
 }
-
+.ticket-table thead:hover{
+  color: black;
+  background-color: #7baadc;
+}
 .ticket-table th, .ticket-table td {
   border: 1px solid #ccc;
   padding: 12px 15px;
